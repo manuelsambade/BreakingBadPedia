@@ -1,123 +1,37 @@
-import React from "react";
-import { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  ImageBackground,
-  Alert,
-  Image,
-  ActivityIndicator,
-} from "react-native";
-import { Input, Button } from "react-native-elements";
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
+import { CharactersList } from "./app/characters-list/CharactersList";
+import { CharacterDetails } from "./app/character-details/CharacterDetails";
+import Login from "./app/login/Login";
+
+export const Screens = {
+  login: "login",
+  charactersList: "charactersList",
+  characterDetails: "characterDetails",
+};
 
 export default function App() {
-  const [userCredentials, setUserCredentials] = useState({
-    username: "",
-    password: "",
-  });
-
-  const [loading, setLoading] = useState(false);
-
-  const clearCredentials = () => {
-    setUserCredentials({
-      username: "",
-      password: "",
-    });
-  };
+  const [activeScreen, setActiveScreen] = useState(Screens.login);
 
   return (
-    <ImageBackground
-      source={require("./app/assets/background.jpg")}
-      style={styles.container}
-    >
-      {!loading ? (
-        <View style={styles.container}>
-          <Image
-            style={styles.logo}
-            resizeMode="contain"
-            source={require("./app/assets/logo.png")}
-          ></Image>
-          <View style={styles.containerInputs}>
-            <Input
-              style={styles.input}
-              placeholder="Username"
-              placeholderTextColor="black"
-              onChangeText={(user) => {
-                setUserCredentials({ ...userCredentials, username: user });
-              }}
-              defaultValue={userCredentials.username}
-              leftIcon={{ type: "font-awesome", name: "user" }}
-            />
-            <Input
-              style={styles.input}
-              placeholder="Password"
-              placeholderTextColor="black"
-              secureTextEntry={true}
-              onChangeText={(pw) =>
-                setUserCredentials({ ...userCredentials, password: pw })
-              }
-              defaultValue={userCredentials.password}
-              leftIcon={{ type: "font-awesome", name: "lock" }}
-            />
-            <Button
-              buttonStyle={styles.loginBtn}
-              containerStyle={styles.loginBtnContainer}
-              title="Login"
-              onPress={() => {
-                setLoading(true);
-                clearCredentials();
-                setTimeout(() => setLoading(false), 2000);
-              }}
-            />
-          </View>
-        </View>
+    <View style={styles.container}>
+      {activeScreen == Screens.login ? (
+        <Login setActiveScreen={setActiveScreen} />
       ) : null}
-      {loading ? (
-        <View style={[styles.loadingContainer]}>
-          <ActivityIndicator size="large" color="rgb(11,88,49)" />
-        </View>
+      {activeScreen == Screens.charactersList ? (
+        <CharactersList setActiveScreen={setActiveScreen} />
       ) : null}
-    </ImageBackground>
+      {activeScreen == Screens.characterDetails ? (
+        <CharacterDetails setActiveScreen={setActiveScreen} />
+      ) : null}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
-    width: "100%",
-  },
-  containerInputs: {
-    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    width: "55%",
-    marginTop: 20,
-  },
-  input: {
-    textAlign: "center",
-    marginVertical: 5,
-  },
-  logo: {
-    width: 200,
-    height: 250,
-  },
-  loginBtn: {
-    color: "white",
-    backgroundColor: "rgb(11,88,49)",
-    width: "75%",
-  },
-  loginBtnContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "75%",
-    // marginBottom: 30,
-  },
-  loadingContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
