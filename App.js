@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { CharactersList } from "./app/characters-list/CharactersList";
-import { CharacterDetails } from "./app/character-details/CharacterDetails";
+import { CharactersList } from "./app/screens/characters-list/CharactersList";
+import { CharacterDetails } from "./app/screens/character-details/CharacterDetails";
 import Login from "./app/login/Login";
 
 export const Screens = {
   login: "login",
   charactersList: "charactersList",
-  characterDetails: "characterDetails",
 };
 
 export default function App() {
@@ -20,9 +19,6 @@ export default function App() {
       ) : null}
       {activeScreen == Screens.charactersList ? (
         <CharactersList setActiveScreen={setActiveScreen} />
-      ) : null}
-      {activeScreen == Screens.characterDetails ? (
-        <CharacterDetails setActiveScreen={setActiveScreen} />
       ) : null}
     </View>
   );

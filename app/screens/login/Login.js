@@ -4,7 +4,6 @@ import {
   StyleSheet,
   View,
   ImageBackground,
-  Alert,
   Image,
   ActivityIndicator,
 } from "react-native";
@@ -28,7 +27,7 @@ export const Login = (props) => {
 
   return (
     <ImageBackground
-      source={require("../assets/background.jpg")}
+      source={require("../../assets/background.jpg")}
       style={styles.container}
     >
       {!loading ? (
@@ -36,7 +35,7 @@ export const Login = (props) => {
           <Image
             style={styles.logo}
             resizeMode="contain"
-            source={require("../assets/logo.png")}
+            source={require("../../assets/logo.png")}
           ></Image>
           <View style={styles.containerInputs}>
             <Input
