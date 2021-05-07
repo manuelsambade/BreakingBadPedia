@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Input, Button } from "react-native-elements";
-import { Screens } from "../../App";
+import { Screens } from "../../../App";
 
 export const Login = (props) => {
   const [userCredentials, setUserCredentials] = useState({

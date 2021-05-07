@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { CharactersList } from "./app/screens/characters-list/CharactersList";
 import { CharacterDetails } from "./app/screens/character-details/CharacterDetails";
-import Login from "./app/login/Login";
+import Login from "./app/screens/login/Login";
 
 export const Screens = {
   login: "login",
