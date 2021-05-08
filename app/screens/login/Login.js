@@ -1,13 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  ImageBackground,
-  Image,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, View, ImageBackground, Image } from "react-native";
 import { Input, Button } from "react-native-elements";
+import { Colors } from "../../shared/Colors";
 import { Screens } from "../../../App";
 
 export const Login = (props) => {
@@ -15,8 +10,6 @@ export const Login = (props) => {
     username: "",
     password: "",
   });
-
-  const [loading, setLoading] = useState(false);
 
   const clearCredentials = () => {
     setUserCredentials({
@@ -30,55 +23,47 @@ export const Login = (props) => {
       source={require("../../assets/background.jpg")}
       style={styles.container}
     >
-      {!loading ? (
-        <View style={styles.container}>
-          <Image
-            style={styles.logo}
-            resizeMode="contain"
-            source={require("../../assets/logo.png")}
-          ></Image>
-          <View style={styles.containerInputs}>
-            <Input
-              style={styles.input}
-              placeholder="Username"
-              placeholderTextColor="black"
-              onChangeText={(user) => {
-                setUserCredentials({ ...userCredentials, username: user });
-              }}
-              defaultValue={userCredentials.username}
-              leftIcon={{ type: "font-awesome", name: "user" }}
-            />
-            <Input
-              style={styles.input}
-              placeholder="Password"
-              placeholderTextColor="black"
-              secureTextEntry={true}
-              onChangeText={(pw) =>
-                setUserCredentials({ ...userCredentials, password: pw })
-              }
-              defaultValue={userCredentials.password}
-              leftIcon={{ type: "font-awesome", name: "lock" }}
-            />
-            <Button
-              buttonStyle={styles.loginBtn}
-              containerStyle={styles.loginBtnContainer}
-              title="Login"
-              onPress={() => {
-                setLoading(true);
-                clearCredentials();
-                setTimeout(() => {
-                  props.setActiveScreen(Screens.charactersList);
-                }, 1500);
-              }}
-            />
-          </View>
-        </View>
-      ) : null}
-      {loading ? (
-        <View style={[styles.loadingContainer]}>
-          <ActivityIndicator size="large" color="rgb(11,88,49)" />
-        </View>
-      ) : null}
+      {/* <View style={styles.container}> */}
+      {/* <View style={styles.containerInputs}> */}
+      <Image
+        style={styles.logo}
+        resizeMode="contain"
+        source={require("../../assets/logo.png")}
+      ></Image>
+      {/* <Input
+            style={styles.input}
+            placeholder="Username"
+            placeholderTextColor="black"
+            onChangeText={(user) => {
+              setUserCredentials({ ...userCredentials, username: user });
+            }}
+            defaultValue={userCredentials.username}
+            leftIcon={{ type: "font-awesome", name: "user" }}
+            underlineColorAndroid={"rgba(0,0,0,0)"}
+          />
+          <Input
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor="black"
+            secureTextEntry={true}
+            onChangeText={(pw) =>
+              setUserCredentials({ ...userCredentials, password: pw })
+            }
+            defaultValue={userCredentials.password}
+            leftIcon={{ type: "font-awesome", name: "lock" }}
+            underlineColorAndroid={"rgba(0,0,0,0)"}
+          /> */}
+      <Button
+        buttonStyle={styles.loginBtn}
+        containerStyle={styles.loginBtnContainer}
+        title="Login"
+        onPress={() => {
+          clearCredentials();
+          props.setActiveScreen(Screens.charactersList);
+        }}
+      />
+      {/* </View> */}
+      {/* </View> */}
     </ImageBackground>
   );
 };
@@ -87,7 +72,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     width: "100%",
   },
   containerInputs: {
@@ -109,18 +94,14 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     color: "white",
-    backgroundColor: "rgb(11,88,49)",
+    backgroundColor: Colors.main,
     width: 150,
   },
   loginBtnContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-  },
-  loadingContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+    marginBottom: 100,
   },
 });
 
